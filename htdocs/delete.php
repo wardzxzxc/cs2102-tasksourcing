@@ -23,7 +23,7 @@
       if (isset($_POST['submit'])) {
 
     		$id = $_POST[user_id];
-    		$query = "DELETE FROM people WHERE user_id = $id";
+    		$query = "DELETE FROM users WHERE user_id = $id";
         $execute = pg_query ($db, $query);
 
     		if (!$execute) {
