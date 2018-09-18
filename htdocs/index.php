@@ -7,9 +7,9 @@
 <body>
   <h2>Task Creation</h2>
   <ul>
-    <li><a href="/create.php">Create Tasks></a></li>
-    <li><a href="/readupdate.php">Read/Update Tasks</a></li>
-    <li><a href="/delete.php">Delete Task</a></li>
+      <button><a href="/create.php">Create Task</a></button><br/>
+  	  <button><a href="/readupdate.php">Read/Update Task</a></button><br/>
+  	  <button><a href="/delete.php">Delete Task</a></button>
   </ul>
 </body>
 </html>
