@@ -14,9 +14,9 @@
         </form>
 </ul>
 <?php
-    $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=jinwei95");
-    $result = pg_query($db, "SELECT * FROM users where user_id = '$_POST[userid]'");
-    $row    = pg_fetch_assoc($result);
+    session_start();
+    include('connection.php');
+    
     if (isset($_POST['submit'])) {
         echo "<ul><form name='update' action='update.php' method='POST'>
         <li>User ID:</li>
