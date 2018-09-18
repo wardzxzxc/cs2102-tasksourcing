@@ -18,7 +18,7 @@
     session_start();
       include('connection.php');
     
-    $result = pg_query($db, "SELECT * FROM users where user_id = '$_POST[userid]'");
+    $result = pg_query($db, "SELECT * FROM users WHERE user_id = '$_POST[userid]'");
     $row    = pg_fetch_assoc($result);
     if (isset($_POST['submit'])) {
         echo "<ul><form name='readupdate' action='readupdate.php' method='POST'>
@@ -56,13 +56,14 @@
         </ul>";
     }
     if (isset($_POST['new'])) {
-        $result = pg_query($db, "UPDATE users SET user_id = '$_POST[userid_updated]',
+         $result = pg_query($db, "UPDATE users SET
                            first_name = '$_POST[first_name_updated]',
                            last_name = '$_POST[last_name_updated]',
                            email = '$_POST[email_updated]',
                            phone = '$_POST[phone_updated]',
                            password = '$_POST[password_updated]',
-                           zipcode = '$_POST[zipcode_updated]'");
+                           zipcode = '$_POST[zipcode_updated]' 
+                           WHERE user_id = '$_POST[userid_updated]'");
                            
         $full_name = $_POST[first_name_updated] . ' ' . $_POST[last_name_updated];
 
