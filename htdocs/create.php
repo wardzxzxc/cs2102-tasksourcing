@@ -28,6 +28,7 @@
       <li><input type='text' name='is_admin'/></li>
       <li><input type='submit' name='create' value='Create'/></li>  
     </form>
+    <button><a href="index.php">Main Menu</a></button>
   </ul>
   
   <?php
