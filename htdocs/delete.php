@@ -15,6 +15,7 @@
         <li><input type="text" name="user_id" /></li>
         <li><input type="submit" name="submit" /></li>
       </form>
+      <button><a href="index.php">Main Menu</a></button>
     </ul>
     <?php
       session_start();
