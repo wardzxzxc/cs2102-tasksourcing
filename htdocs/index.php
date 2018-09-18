@@ -8,8 +8,7 @@
   <h2>Task Creation</h2>
   <ul>
     <li><a href="/create.php">Create Tasks></a></li>
-    <li><a href="/read.php">Read Tasks</li>
-    <li><a href="/update.php">Update Tasks</a></li>
+    <li><a href="/readupdate.php">Read/Update Tasks</a></li>
     <li><a href="/delete.php">Delete Task</a></li>
   </ul>
 </body>
