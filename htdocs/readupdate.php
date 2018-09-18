@@ -7,7 +7,7 @@
 <body>
 <h2>Supply User ID and enter</h2>
 <ul>
-<form name="display" action="update.php" method="POST" >
+<form name="display" action="readupdate.php" method="POST" >
 <li>User ID:</li>
 <li><input type="text" name="userid" /></li>
 <li><input type="submit" name="submit" /></li>
@@ -20,7 +20,7 @@
     $result = pg_query($db, "SELECT * FROM users where user_id = '$_POST[userid]'");
     $row    = pg_fetch_assoc($result);
     if (isset($_POST['submit'])) {
-        echo "<ul><form name='update' action='update.php' method='POST'>
+        echo "<ul><form name='readupdate' action='readupdate.php' method='POST'>
         <li>User ID:</li>
         <li><input type='text' name='userid_updated'
         value='$row[user_id]' /></li>
