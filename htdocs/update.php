@@ -62,9 +62,9 @@
                            zipcode = '$_POST[zipcode_updated]'");
                         
                            if (!$result) {
-                           echo "Update failed!";
+                           echo "Update user details failed!";
                            } else {
-                           echo "Update successful!";
+                           echo "Update user details successful!";
                            }
                            }
                            ?>
