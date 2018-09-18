@@ -17,6 +17,9 @@
     session_start();
     include('connection.php');
     
+    $result = pg_query($db, "SELECT * FROM users where user_id = '$_POST[userid]'");
+    $row    = pg_fetch_assoc($result);
+
     if (isset($_POST['submit'])) {
         echo "<ul><form name='update' action='update.php' method='POST'>
         <li>User ID:</li>
