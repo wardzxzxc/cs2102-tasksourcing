@@ -12,7 +12,7 @@
     <ul>
       <form name="display" action="delete.php" method="POST" >
         <li>User ID:</li>
-        <li><input type="text" name="userid" /></li>
+        <li><input type="text" name="user_id" /></li>
         <li><input type="submit" name="submit" /></li>
       </form>
     </ul>
@@ -22,8 +22,8 @@
 
       if (isset($_POST['submit'])) {
 
-    		$id = $_POST[userid];
-    		$query = "DELETE FROM people WHERE userid = $id";
+    		$id = $_POST[user_id];
+    		$query = "DELETE FROM people WHERE user_id = $id";
         $execute = pg_query ($db, $query);
 
     		if (!$execute) {
