@@ -15,7 +15,7 @@ CREATE table bid (
 	bid_datetime TIMESTAMP NOT NULL,
 	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
 	bid_userid INTEGER NOT NULL,
-	FOREIGN KEY (bid_userid) REFERENCES user (user_id)
+	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
 						ON UPDATE cascade
 						ON DELETE cascade
 	bid_taskid INTEGER REFERENCES task (task_id)
@@ -34,7 +34,7 @@ CREATE table task (
 	task_type VARCHAR(128) REFERENCES catalogue (name),
 	task_winningbid_id INTEGER REFERENCES bid (bid_id),
 	task_owner INTEGER NOT NULL,
-	FOREIGN KEY (task_owner) REFERENCES user (user_id)
+	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
 						ON DELETE cascade,
 	CONSTRAINT check_task CHECK (task_endtime > task_starttime),
