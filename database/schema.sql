@@ -17,7 +17,7 @@ CREATE table bid (
 	bid_userid INTEGER NOT NULL,
 	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
 						ON UPDATE cascade
-						ON DELETE cascade
+						ON DELETE cascade,
 	bid_taskid INTEGER REFERENCES task (task_id)
 );
 
@@ -43,5 +43,5 @@ CREATE table task (
 
 CREATE table catalogue (
 	catalogue_id SERIAL PRIMARY KEY NOT NULL,
-	name VARCHAR(128) NOT NULL UNIQUE,
-)
+	name VARCHAR(128) NOT NULL UNIQUE
+);
