@@ -14,6 +14,17 @@ CREATE table catalogue (
 	name VARCHAR(128) NOT NULL UNIQUE
 );
 
+CREATE table bid (
+	bid_id SERIAL PRIMARY KEY NOT NULL,
+	bid_cost DECIMAL NOT NULL, 
+	bid_datetime TIMESTAMP NOT NULL,
+	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
+	bid_userid INTEGER NOT NULL,
+	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
+						ON UPDATE cascade
+						ON DELETE cascade
+);
+
 CREATE table task (
 	task_id SERIAL PRIMARY KEY NOT NULL,
 	task_cost DECIMAL NOT NULL, 
@@ -30,19 +41,7 @@ CREATE table task (
 	task_owner INTEGER NOT NULL,
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
-						ON DELETE cascade
+						ON DELETE cascade,
 	CONSTRAINT check_task CHECK (task_endtime > task_starttime),
 	CONSTRAINT check_start CHECK (task_starttime >= now())
-);
-
-
-CREATE table bid (
-	bid_id SERIAL PRIMARY KEY NOT NULL,
-	bid_cost DECIMAL NOT NULL, 
-	bid_datetime TIMESTAMP NOT NULL,
-	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
-	bid_userid INTEGER NOT NULL,
-	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
-						ON UPDATE cascade
-						ON DELETE cascade
 );
