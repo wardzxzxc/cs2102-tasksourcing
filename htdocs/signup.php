@@ -1,6 +1,7 @@
 	<?php 
 	session_start();
 	include('connection.php');
+
 	if ($_POST[password] == ($_POST[password_repeat])) {
 	 	if (isset($_POST['signup'])) {  // Submit the insert SQL command
 	 		$result = pg_query($db, "INSERT INTO users(first_name, last_name, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]',
@@ -18,6 +19,7 @@
 	 } else {
 	 	echo "<script type='text/javascript'>alert('The passwords you entered does not match!')</script>";
 	 }
+
 	 ?>
 
 
@@ -55,14 +57,14 @@
 	 			value="<?php echo isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
 
 	 			<label for="email"><b>Email</b></label>
-	 			<input type="text" placeholder="Enter Email" name="email" required
+	 			<input type="email" placeholder="Enter Email" name="email" required
 	 			value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
 
 	 			<label for="password"><b>Password</b></label>
-	 			<input type="password" placeholder="Enter Password" name="password" required>
+	 			<input type="password" placeholder="Enter Password" name="password" minlength="8" required>
 
 	 			<label for="password_repeat"><b>Repeat Password</b></label>
-	 			<input type="password" placeholder="Repeat Password" name="password_repeat" required>
+	 			<input type="password" placeholder="Repeat Password" name="password_repeat" minlength="8" required>
 
 	 			<label for="phone"><b>Contact Number</b></label>
 	 			<input type="text" placeholder="Enter Contact Number" name="phone" required
@@ -77,11 +79,11 @@
 	 				<a href="index.php">
 	 					<button type="button" class="cancelbtn">Cancel</button>
 	 				</a>
-	 				
+
 	 				<button type="submit" name='signup' class="signupbtn">Sign Up</button>
 	 			</div>
 	 		</div>
-	 		
+
 	 	</form>
 	 </body>
 	 <?php 
