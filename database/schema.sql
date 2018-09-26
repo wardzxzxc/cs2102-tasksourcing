@@ -9,16 +9,9 @@ CREATE table users (
 	is_admin BOOLEAN DEFAULT FALSE
 );
 
-CREATE table bid (
-	bid_id SERIAL PRIMARY KEY NOT NULL,
-	bid_cost DECIMAL NOT NULL, 
-	bid_datetime TIMESTAMP NOT NULL,
-	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
-	bid_userid INTEGER NOT NULL,
-	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
-						ON UPDATE cascade
-						ON DELETE cascade,
-	bid_taskid INTEGER REFERENCES task (task_id)
+CREATE table catalogue (
+	catalogue_id SERIAL PRIMARY KEY NOT NULL,
+	name VARCHAR(128) NOT NULL UNIQUE
 );
 
 CREATE table task (
@@ -42,7 +35,14 @@ CREATE table task (
 	CONSTRAINT check_start CHECK (task_starttime >= now())
 );
 
-CREATE table catalogue (
-	catalogue_id SERIAL PRIMARY KEY NOT NULL,
-	name VARCHAR(128) NOT NULL UNIQUE
+
+CREATE table bid (
+	bid_id SERIAL PRIMARY KEY NOT NULL,
+	bid_cost DECIMAL NOT NULL, 
+	bid_datetime TIMESTAMP NOT NULL,
+	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
+	bid_userid INTEGER NOT NULL,
+	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
+						ON UPDATE cascade
+						ON DELETE cascade,
 );
