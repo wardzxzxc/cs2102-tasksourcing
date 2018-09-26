@@ -30,7 +30,7 @@ CREATE table task (
 	task_owner INTEGER NOT NULL,
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
-						ON DELETE cascade,
+						ON DELETE cascade
 	CONSTRAINT check_task CHECK (task_endtime > task_starttime),
 	CONSTRAINT check_start CHECK (task_starttime >= now())
 );
@@ -44,5 +44,5 @@ CREATE table bid (
 	bid_userid INTEGER NOT NULL,
 	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
 						ON UPDATE cascade
-						ON DELETE cascade,
+						ON DELETE cascade
 );
