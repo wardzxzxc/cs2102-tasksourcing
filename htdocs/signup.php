@@ -7,17 +7,20 @@
 	 			'$_POST[last_name]', '$_POST[email]', '$_POST[phone]', '$_POST[password]',
 	 			'$_POST[zipcode]', 'FALSE')");
 	 		if (!$result) {
-	 			echo "User not created";
+	 			echo "<script type='text/javascript'>alert('A user with this email address already exists!')</script>";
 	 		} else {
-	 			echo "User created successfully";
+	 			echo "<script type='text/javascript'>
+	 			alert('Registration successful!')
+	 			window.location.href = 'login.php';
+	 			</script>";
 	 		}
 	 	}
 	 } else {
-	 	$message =  '<span> The passwords you entered does not match.';
+	 	echo "<script type='text/javascript'>alert('The passwords you entered does not match!')</script>";
 	 }
-
-
 	 ?>
+
+
 
 	 <!DOCTYPE html>
 	 <html>
@@ -30,7 +33,7 @@
 	 	<link rel="stylesheet" type="text/css" href="./css/signup.css">
 	 </head>
 	 <body>
-	 	<div style="height: 100%">
+	 	<div>
 	 		<?php 
 	 		include 'navbar.php'
 	 		?>
@@ -43,11 +46,6 @@
 	 			<h1>Sign Up</h1>
 	 			<p>Please fill in this form to create an account.</p>
 	 			<hr>
-
-<!-- 	 			<label for="user_id"><b>User ID</b></label>
-	 			<input type="text" placeholder="Enter User ID" name="user_id" required
-	 			value="<?php echo isset($_POST['user_id']) ? $_POST['user_id'] : '' ?>"> -->
-
 	 			<label for="first_name"><b>First Name</b></label>
 	 			<input type="text" placeholder="Enter First Name" name="first_name" required
 	 			value="<?php echo isset($_POST['first_name']) ? $_POST['first_name'] : '' ?>">
@@ -82,33 +80,8 @@
 	 		</div>
 	 		
 	 	</form>
-
 	 </body>
 	 <?php 
 	 include 'footer.php'
 	 ?>
 	 </html>
-
-    <!--
-    <body>  
-    	<ul>
-    		<form name='display' action='signup.php' method='POST' >  
-    			<li>User ID:</li>  
-    			<li><input type='text' name='user_id'/></li>  
-    			<li>First Name:</li>  
-    			<li><input type='text' name='first_name'/></li>  
-    			<li>Last Name:</li>
-    			<li><input type='text' name='last_name'/></li> 
-    			<li>Email:</li>  
-    			<li><input type='text' name='email'/></li>
-    			<li>Phone:</li>  
-    			<li><input type='text' name='phone'/></li>
-    			<li>Password:</li>  
-    			<li><input type='text' name='password'/></li>
-    			<li>Zip Code:</li>  
-    			<li><input type='text' name='zipcode'/></li>
-    			<button><input type='submit' name='signup' value='Sign Up'/></button> 
-    		</form>
-    	</ul>
-    </body>
-    </html> -->
