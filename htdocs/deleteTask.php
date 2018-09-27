@@ -30,7 +30,7 @@
     		if (!$execute) {
           echo "Problem with removing task: $task, please try again.";
     		} else {
-    			echo "Successfully removed task!";
+    			echo "Successfully removed taska!";
     		}
       }
     ?>
