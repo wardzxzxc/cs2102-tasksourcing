@@ -15,12 +15,16 @@ CREATE table catalogue (
 );
 
 CREATE table bid (
-	bid_id SERIAL PRIMARY KEY NOT NULL,
 	bid_cost DECIMAL NOT NULL, 
 	bid_datetime TIMESTAMP NOT NULL,
 	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
 	bid_userid INTEGER NOT NULL,
+	bid_taskid INTEGER NOT NULL,
+	PRIMARY KEY (bid_userid, bid_taskid), 
 	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
+						ON UPDATE cascade
+						ON DELETE cascade,
+	FOREIGN KEY (bid_taskid) REFERENCES task (task_id)
 						ON UPDATE cascade
 						ON DELETE cascade
 );
@@ -34,14 +38,17 @@ CREATE table task (
 	task_zipcode NUMERIC NOT NULL, 
 	task_duration INTEGER NOT NULL,
 	task_starttime TIMESTAMP NOT NULL,
-	task_endtime TIMESTAMP NOT NULL,
 	is_available BOOLEAN DEFAULT FALSE,
 	task_type VARCHAR(128) REFERENCES catalogue (name),
 	task_winningbid_id INTEGER REFERENCES bid (bid_id),
 	task_owner INTEGER NOT NULL,
+	task_catalogue INTEGER NOT NULL, 
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
 						ON DELETE cascade,
-	CONSTRAINT check_task CHECK (task_endtime > task_starttime),
+	FOREIGN KEY(task_catalogue) REFERENCES catalogue(catalogue_id),
+						ON UPDATE cascade
+						ON DELETE cascade,
 	CONSTRAINT check_start CHECK (task_starttime >= now())
 );
+
