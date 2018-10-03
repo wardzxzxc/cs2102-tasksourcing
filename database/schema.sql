@@ -1,5 +1,5 @@
 CREATE table users (
-	user_id SERIAL PRIMARY KEY NOT NULL,
+	user_id SERIAL PRIMARY KEY,
 	first_name VARCHAR (64) NOT NULL,
 	last_name VARCHAR (64) NOT NULL,
 	email VARCHAR (256) UNIQUE NOT NULL,
@@ -10,7 +10,7 @@ CREATE table users (
 );
 
 CREATE table catalogue (
-	catalogue_id SERIAL PRIMARY KEY NOT NULL,
+	catalogue_id SERIAL PRIMARY KEY,
 	name VARCHAR(128) NOT NULL UNIQUE
 );
 
@@ -18,8 +18,8 @@ CREATE table bid (
 	bid_cost DECIMAL NOT NULL, 
 	bid_datetime TIMESTAMP NOT NULL,
 	bid_status INTEGER NOT NULL DEFAULT '1', /*1 refers to pending, 2 refers to accepted, 3 refers to rejected*/
-	bid_userid INTEGER NOT NULL,
-	bid_taskid INTEGER NOT NULL,
+	bid_userid INTEGER,
+	bid_taskid INTEGER,
 	PRIMARY KEY (bid_userid, bid_taskid), 
 	FOREIGN KEY (bid_userid) REFERENCES users (user_id)
 						ON UPDATE cascade
@@ -30,7 +30,7 @@ CREATE table bid (
 );
 
 CREATE table task (
-	task_id SERIAL PRIMARY KEY NOT NULL,
+	task_id SERIAL PRIMARY KEY,
 	task_cost DECIMAL NOT NULL, 
 	task_title VARCHAR (256) NOT NULL,
 	task_description VARCHAR (500) NOT NULL,
@@ -41,8 +41,8 @@ CREATE table task (
 	is_available BOOLEAN DEFAULT FALSE,
 	task_type VARCHAR(128) REFERENCES catalogue (name),
 	task_winningbid_id INTEGER REFERENCES bid (bid_id),
-	task_owner INTEGER NOT NULL,
-	task_catalogue INTEGER NOT NULL, 
+	task_owner INTEGER,
+	task_catalogue INTEGER, 
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
 						ON DELETE cascade,
