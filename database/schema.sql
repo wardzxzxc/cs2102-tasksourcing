@@ -2,6 +2,7 @@ CREATE table users (
 	user_id SERIAL PRIMARY KEY,
 	first_name VARCHAR (64) NOT NULL,
 	last_name VARCHAR (64) NOT NULL,
+	gender VARCHAR (8) NOT NULL,
 	email VARCHAR (256) UNIQUE NOT NULL,
 	phone CHARACTER (8) NOT NULL,
 	password VARCHAR (64) NOT NULL CONSTRAINT too_short CHECK(char_length(password) >= 8),
