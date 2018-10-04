@@ -7,6 +7,7 @@ CREATE table users (
 	phone CHARACTER (8) NOT NULL,
 	password VARCHAR (64) NOT NULL CONSTRAINT too_short CHECK(char_length(password) >= 8),
 	zipcode NUMERIC NOT NULL,
+	bidpoint NUMERIC NOT NULL,
 	is_admin BOOLEAN DEFAULT FALSE
 );
 
