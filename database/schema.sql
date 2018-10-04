@@ -46,7 +46,7 @@ CREATE table task (
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
 						ON DELETE cascade,
-	FOREIGN KEY(task_catalogue) REFERENCES catalogue(catalogue_id),
+	FOREIGN KEY(task_catalogue) REFERENCES catalogue(catalogue_id)
 						ON UPDATE cascade
 						ON DELETE cascade,
 	CONSTRAINT check_start CHECK (task_starttime >= now())
