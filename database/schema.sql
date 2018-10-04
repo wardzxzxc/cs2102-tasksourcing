@@ -7,7 +7,6 @@ CREATE table users (
 	phone CHARACTER (8) NOT NULL,
 	password VARCHAR (64) NOT NULL CONSTRAINT too_short CHECK(char_length(password) >= 8),
 	zipcode NUMERIC NOT NULL,
-	bidpoint NUMERIC NOT NULL,
 	is_admin BOOLEAN DEFAULT FALSE
 );
 
@@ -40,10 +39,8 @@ CREATE table task (
 	task_zipcode NUMERIC NOT NULL, 
 	task_duration INTEGER NOT NULL,
 	task_starttime TIMESTAMP NOT NULL,
-	task_endtime TIMESTAMP NOT NULL,
 	is_available BOOLEAN DEFAULT FALSE,
 	task_type VARCHAR(128) REFERENCES catalogue (name),
-	task_winningbid_id INTEGER,
 	task_owner INTEGER,
 	task_catalogue INTEGER, 
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
