@@ -40,7 +40,7 @@ CREATE table task (
 	task_starttime TIMESTAMP NOT NULL,
 	is_available BOOLEAN DEFAULT FALSE,
 	task_type VARCHAR(128) REFERENCES catalogue (name),
-	task_winningbid_id INTEGER REFERENCES bid (bid_id),
+	task_winningbid_id INTEGER,
 	task_owner INTEGER,
 	task_catalogue INTEGER, 
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
