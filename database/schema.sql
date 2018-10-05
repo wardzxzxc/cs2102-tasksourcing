@@ -11,8 +11,7 @@ CREATE table users (
 );
 
 CREATE table catalogue (
-	catalogue_id SERIAL PRIMARY KEY,
-	name VARCHAR(128) NOT NULL UNIQUE
+	name VARCHAR(128) PRIMARY KEY
 );
 
 CREATE table bid (
@@ -40,13 +39,12 @@ CREATE table task (
 	task_duration INTEGER NOT NULL,
 	task_starttime TIMESTAMP NOT NULL,
 	is_available BOOLEAN DEFAULT FALSE,
-	task_type VARCHAR(128) REFERENCES catalogue (name),
 	task_owner INTEGER,
-	task_catalogue INTEGER, 
+	task_catalogue VARCHAR(128),
 	FOREIGN KEY (task_owner) REFERENCES users (user_id)
 						ON UPDATE cascade
 						ON DELETE cascade,
-	FOREIGN KEY(task_catalogue) REFERENCES catalogue(catalogue_id)
+	FOREIGN KEY(task_catalogue) REFERENCES catalogue(name)
 						ON UPDATE cascade
 						ON DELETE cascade,
 	CONSTRAINT check_start CHECK (task_starttime >= now())
