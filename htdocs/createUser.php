@@ -35,7 +35,7 @@ li {
 
   <h2 class="w3-black">Create User</h2>
   <ul>
-    <form name="display" action="create.php" method="POST" >
+    <form name="display" action="createUser.php" method="POST" >
         <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="First Name" name='first_name'/></p>
 
