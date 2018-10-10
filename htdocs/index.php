@@ -12,13 +12,18 @@
 		include 'navbar.php'
 	 ?>
 	<div class="jumbotron" style=" padding:10%">
-	  <h1 class="display-4">TASK TORTOISE</h1>
+		<?php
+		echo "<br>";
+		echo '
+		<img src="/img/tasktortoisebg.png" width="842" height="205" title="tasktortoise" alt="tasktortoise" />
+		';
+		?>
+		<h1 class="display-4">TASK TORTOISE</h1>
 	  <p>The convenient & affordable way to get things done around the home </p>
 	  <p class="lead">
 	  <button type="button" class="btn btn-secondary btn-lg"><a href="signup.php">Sign Up Here!</a></button>
-		<button type="button" class="btn btn-secondary btn-lg"><a href="readupdate.php">Search for User Here!</a></button>
-		<button type="button" class="btn btn-secondary btn-lg"><a href="readupdatetask.php">Search for Task Here!</a></button>
-		<button type="button" class="btn btn-secondary btn-lg"><a href="createTask.php">Create New Task Here!</a></button>
+		<button type="button" class="btn btn-secondary btn-lg"><a href="searchuser.php">Search for User Here!</a></button>
+		<button type="button" class="btn btn-secondary btn-lg"><a href="searchtask.php">Search for Task Here!</a></button>
 	</div>
 	<?php
 		include 'footer.php'
