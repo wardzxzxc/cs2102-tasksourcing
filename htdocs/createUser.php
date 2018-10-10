@@ -25,7 +25,6 @@ li {
 }
     </style>
 
-</head>
 <body>
     <div>
         <?php
@@ -34,7 +33,7 @@ li {
     </div>
 
   <h2 class="w3-black">Create User</h2>
-  <ul>
+        <ul>
     <form name="display" action="createUser.php" method="POST" >
         <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="First Name" name='first_name'/></p>
@@ -65,14 +64,16 @@ li {
         <option value = "True"> True </option>
         <option value = "False"> False </option>
         </select></p>
-      <li><input class="w3-button w3-black" type='submit' name='create'/></li>
+
+        <p><input class="w3-button w3-black" type='submit' name='create'/></p>
     </form>
         </br>
     <button class="w3-button w3-black"><a href="index.php">Main Menu</a></button>
-  </ul>
+        </ul>
   
-  <?php
-    $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=jinwei95");
+  <?php    
+    session_start();
+    include('connection.php');
 
     if (isset($_POST['create'])) {  // Submit the insert SQL command
         $result = pg_query($db, "INSERT INTO users (first_name, last_name, gender, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]', '$_POST[last_name]', '$_POST[gender]', '$_POST[email]', '$_POST[phone]', '$_POST[password]', '$_POST[zipcode]', '$_POST[is_admin]')");
