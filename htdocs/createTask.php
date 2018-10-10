@@ -17,15 +17,14 @@ li {
 
 .message {
     text-align: center;
-padding: 2px;
+    padding: 2px;
     background-color: #000000;
-border: 2px solid #FFFFFF;
-width: auto;
-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    width: auto;
+    color: #FFFFFF;
 }
     </style>
 
-</head>
 <body>
     <div>
         <?php
@@ -34,8 +33,8 @@ color: #FFFFFF;
     </div>
 
   <h2 class="w3-black">Create Task</h2>
-  <ul>
-    <form name='display' action='createTask.php' method='POST' >
+        <ul>
+    <form name="display" action="createTask.php" method="POST" >
         <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Task ID" name='task_id'/></p>
 
@@ -66,11 +65,11 @@ color: #FFFFFF;
           <option value = "No"> No </option>
         </select></p>
 
-      <li><input class="w3-button w3-black" type='submit' name='createTask'/></li>
+        <p><input class="w3-button w3-black" type='submit' name='createTask'/></p>
     </form>
         </br>
     <button class="w3-button w3-black"><a href="index.php">Main Menu</a></button>
-  </ul>
+        </ul>
 
   <?php
     session_start();
