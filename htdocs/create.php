@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/read.css">
 </head>
-<style>
 
+    <style>
 li {
     list-style: none;
 }
@@ -23,7 +23,7 @@ li {
     width: auto;
     color: #FFFFFF;
 }
-</style>
+    </style>
 
 </head>
 <body>
@@ -36,10 +36,10 @@ li {
   <h2 class="w3-black">Create User</h2>
   <ul>
     <form name="display" action="create.php" method="POST" >
-        <p><input class="w3-input w3-padding-16 w3-border" type='text'
+        <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="First Name" name='first_name'/></p>
 
-        <p><input class="w3-input w3-padding-16 w3-border" type='text'
+        <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Last Name" name='last_name'/></p>
 
         <p><select class="w3-light-grey w3-dropdown-click w3-padding-16 w3-border" name = "gender">
@@ -48,16 +48,16 @@ li {
         <option value = "Female"> Female </option>
         </select></p>
 
-        <p><input class="w3-input w3-padding-16 w3-border" type='text'
+        <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Email" name='email'/></p>
 
-        <p><input class="w3-input w3-padding-16 w3-border" type='text'
+        <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Phone" name='phone'/></p>
 
-        <p><input class="w3-input w3-padding-16 w3-border" type='text'
+        <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Password" name='password'/></p>
 
-        <p><input class="w3-input w3-padding-16 w3-border" type='text'
+        <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Zipcode" name='zipcode'/></p>
 
         <p><select class="w3-light-grey w3-dropdown-click w3-padding-16 w3-border" name = "is_admin">
@@ -86,6 +86,6 @@ li {
 </body>
 
 <?php
-include 'footer.php'
+    include 'footer.php'
 ?>
 </html>
