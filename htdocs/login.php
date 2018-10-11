@@ -3,18 +3,18 @@
     include('connection.php');
 
     if(isset($_POST['login'])) {
-    	$result = pg_query($db, "SELECT password, is_admin FROM users WHERE email = '$_POST[email]'");
+    	$result = pg_query($db, "SELECT password, is_admin, user_id FROM users WHERE email = '$_POST[email]'");
     	if ($result != false) {
     		$num_rows = pg_num_rows($result);
     		if ($num_rows > 0) {
     			$result_arr = pg_fetch_row($result);
     			if ($_POST[password] === ($result_arr[0])) {
-    				$_SESSION["user"] = $_POST[email];
+    				$_SESSION["user"] = $result_arr[2];
     				if ($result_arr[1] == t) {
     					$_SESSION["is_admin"] = t;
     					$message = '<span>Admin login successful!</span>'; 					
     				} else {
-    					$message =  '<span>Login successful!</span>';
+    					header("Location: dashboard.php");
     				}
     			} else {
     				$message = '<span>Sorry, the email or password is incorrect.</span>';

@@ -13,6 +13,7 @@
       	}
        ?>
       <a href="aboutus.php" class="w3-bar-item w3-button">About</a>
+      <a href="searchtask.php" class="w3-bar-item w3-button">Search</a>
     </div>
   </div>
 </div>

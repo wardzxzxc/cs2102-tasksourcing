@@ -1,24 +1,8 @@
 <?php
 session_start();
 include('connection.php');
-
-if ($_POST[password] == ($_POST[password_repeat])) {
-  if (isset($_POST['signup'])) {  // Submit the insert SQL command
-    $result = pg_query($db, "INSERT INTO users(first_name, last_name, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]',
-      '$_POST[last_name]', '$_POST[email]', '$_POST[phone]', '$_POST[password]',
-      '$_POST[zipcode]', 'FALSE')");
-    if (!$result) {
-      echo "<script type='text/javascript'>alert('A user with this email address already exists!')</script>";
-    } else {
-      echo "<script type='text/javascript'>
-      alert('Registration successful!')
-      window.location.href = 'login.php';
-      </script>";
-    }
-  }
- } else {
-  echo "<script type='text/javascript'>alert('The passwords you entered does not match!')</script>";
- }
+$curUser = $_SESSION["user"];
+$_POST['bid_taskid'] = $_POST['task_id'];
 
  ?>
 
@@ -43,7 +27,7 @@ if ($_POST[password] == ($_POST[password_repeat])) {
       <div class = "container">
 
         <?php
-          $result = pg_query ($db, "SELECT * FROM bid");
+          $result = pg_query ($db, "SELECT * FROM bid WHERE bid_taskid = '$_POST[bid_taskid]'");
           $result2 = pg_query($db, "SELECT user_id, first_name, last_name FROM users");
         ?>
 
@@ -69,7 +53,7 @@ if ($_POST[password] == ($_POST[password_repeat])) {
                   ?>
                   <?php
                   if ($row['3'] == $row2['0']){
-                    echo $row2['1'], $row2['2'];
+                    echo $row2['1'];
                   }
                   ?>
               </td>
@@ -81,6 +65,12 @@ if ($_POST[password] == ($_POST[password_repeat])) {
           }
           ?>
         </table>
+         <form action="createbid.php" method="POST" >
+                <input type = "hidden" name = "taskid" value = <?php echo $_POST['bid_taskid'] ?> />
+                <button class="w3-button w3-white w3-border w3-border-blue" type="submit" name = "accept">
+                  <i class=" "></i> Bid
+                </button>
+      </form>
 
       </div>
 

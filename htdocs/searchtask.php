@@ -59,7 +59,14 @@
                         }; ?></td>
               <td><?php echo $row['9']; ?></td>
               <td><?php echo $row['10']; ?></td>
-              <td><form action = "searchbid.php"><button type = "text">View Current Bid</button></form></td>
+              <td>
+                <form action = "searchbid.php" method="POST">
+                <input type = "hidden" name = "task_id" value = "<?php echo $row['0']; ?>"/>
+                <button class="w3-button w3-black" type="submit">
+                  View Current Bid
+                </button>
+                </form>
+              </td>
           </tr>
           <?php
             }
