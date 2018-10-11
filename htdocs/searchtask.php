@@ -1,25 +1,7 @@
 <?php
-session_start();
-include('connection.php');
-
-if ($_POST[password] == ($_POST[password_repeat])) {
-  if (isset($_POST['signup'])) {  // Submit the insert SQL command
-    $result = pg_query($db, "INSERT INTO users(first_name, last_name, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]',
-      '$_POST[last_name]', '$_POST[email]', '$_POST[phone]', '$_POST[password]',
-      '$_POST[zipcode]', 'FALSE')");
-    if (!$result) {
-      echo "<script type='text/javascript'>alert('A user with this email address already exists!')</script>";
-    } else {
-      echo "<script type='text/javascript'>
-      alert('Registration successful!')
-      window.location.href = 'login.php';
-      </script>";
-    }
-  }
- } else {
-  echo "<script type='text/javascript'>alert('The passwords you entered does not match!')</script>";
- }
-
+  session_start();
+  include('connection.php');
+  $curUser = $_SESSION["user"];
  ?>
 
  <!DOCTYPE html>
@@ -68,9 +50,10 @@ if ($_POST[password] == ($_POST[password_repeat])) {
               <td><?php echo $row['3']; ?></td>
               <td><?php echo $row ['1']?></td>
               <td><?php echo $row['5']; ?></td>
-              <td><?php echo $row['6']; ?></td>
+              <td><?php echo $row['6']; ?> hours</td>
               <td><?php echo $row['7']; ?></td>
-              <td><?php if ($row['8']="t"){echo "True";
+              <td><?php if ($row['8'] == "t"){
+                          echo "True";
                         }else{
                           echo "False";
                         }; ?></td>
