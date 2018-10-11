@@ -4,8 +4,8 @@
 
 	if ($_POST[password] == ($_POST[password_repeat])) {
 	 	if (isset($_POST['signup'])) {  // Submit the insert SQL command
-	 		$result = pg_query($db, "INSERT INTO users(first_name, last_name, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]',
-	 			'$_POST[last_name]', '$_POST[email]', '$_POST[phone]', '$_POST[password]',
+	 		$result = pg_query($db, "INSERT INTO users(first_name, last_name, gender, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]',
+	 			'$_POST[last_name]', '$_POST[gender]', '$_POST[email]', '$_POST[phone]', '$_POST[password]',
 	 			'$_POST[zipcode]', 'FALSE')");
 	 		if (!$result) {
 	 			echo "<script type='text/javascript'>alert('A user with this email address already exists!')</script>";
@@ -56,6 +56,13 @@
 	 			<input type="text" placeholder="Enter Last Name" name="last_name" required
 	 			value="<?php echo isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
 
+	 			<label for="gender"><b>Gender</b></label><br/>
+	 			<select name="gender">
+	 				<option value="MALE">Male</option>
+	 				<option value="FEMALE">Female</option>
+	 			</select>
+				<br/>
+				<br/>
 	 			<label for="email"><b>Email</b></label>
 	 			<input type="email" placeholder="Enter Email" name="email" required
 	 			value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
