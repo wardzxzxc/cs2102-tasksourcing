@@ -13,7 +13,8 @@
       	}
        ?>
       <a href="aboutus.php" class="w3-bar-item w3-button">About</a>
-      <a href="searchtask.php" class="w3-bar-item w3-button">Search</a>
+      <a href="searchtask.php" class="w3-bar-item w3-button">Search Tasks</a>
+      <a href="createTask.php" class="w3-bar-item w3-button">Create Task</a>
     </div>
   </div>
 </div>
