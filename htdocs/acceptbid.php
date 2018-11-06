@@ -6,6 +6,8 @@
       $bidder = $arr[0];
       $taskid = $arr[1];
 
+      //set everything to rejected
+      $result =  pg_query($db, "UPDATE bid SET bid_status = '3' WHERE bid_taskid = '$taskid'");
       $result1 = pg_query($db, "UPDATE bid SET bid_status = '2' WHERE bid_userid = '$bidder' AND bid_taskid = '$taskid'");
       $result2 = pg_query($db, "UPDATE task SET is_available = 'f' WHERE task_id = '$taskid'");
 ?>

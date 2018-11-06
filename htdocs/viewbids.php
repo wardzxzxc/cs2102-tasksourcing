@@ -2,8 +2,9 @@
       session_start();
       include('connection.php');
       $curUser = $_SESSION["user"];
-      $_POST['taskid'] = $_POST['Display'];
+      $_POST['taskid'] = $_POST['view'];
       $result = pg_query($db, "SELECT * FROM bid b, users u  WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]'");
+      $result1 = pg_query($db, "SELECT * FROM bid b, users u  WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]' AND b.bid_status = 2");
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,27 +30,47 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="panel panel-info">
-        <?php 
+        <?php
+            
+            // while($row = pg_fetch_assoc($result)){ 
+            //   if ($row["bid_status"] == 2) {
+            //     $bidAccepted = 1;
+            //     echo $bidAccepted;
+            //   }
+            // }
+
             while($row = pg_fetch_assoc($result)){   //Creates a loop to loop through results
-  
-            echo '
-            <div class="panel-body">
+
+            echo 
+            '<div class="panel-body" style="border: 2px solid black;">
               Bidder: '.$row["email"]. '</br>
-              Status: '.$row["bid_status"]. '</br>
+              Status: ';
+            if ($row["bid_status"] == 1) {
+              echo 'Pending';
+            } else if ($row["bid_status"] == 2) {
+              echo 'Accepted';
+            } else {
+              echo 'Rejected';
+            }
+            echo '</br>
               Bid Amount: $'.$row["bid_cost"]. '</br>
               Bid Created Date/Time: '.$row["bid_datetime"]. '</br>
-            </div>
-            <div class="w3-row-padding" style="margin-top:64px padding:128px 16px">
-              <div class="w3-content" align="center">
-                <form action="acceptbid.php" method="POST" >
-                    <button class="w3-button w3-black" type="submit" name = "accept" value = "'.$row["user_id"]. "//" .$row["bid_taskid"].'">
-                         Accept bid
-                    </button>
-                </form>
-              </div>
             </div>';
+            
+            if (pg_numrows($result1) == 0) {
+              echo '
+              <div class="w3-row-padding" style="margin-top:64px padding:128px 16px">
+                <div class="w3-content" align="center">
+                  <form action="acceptbid.php" method="POST" >
+                      <button class="w3-button w3-black" type="submit" name = "accept" value = "'.$row["user_id"]. "//" .$row["bid_taskid"].'">
+                          Accept bid
+                      </button>
+                  </form>
+                </div>
+              </div>';
             }
-?>
+          }
+        ?>
         </div>
       </div>
     </div>

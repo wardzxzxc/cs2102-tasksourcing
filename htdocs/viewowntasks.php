@@ -45,7 +45,7 @@
           <div class="col-sm-12">
             <div class="panel panel-info">
               <?php 
-                if(!$result) {
+                if(pg_num_rows($result) == 0) {
                             echo '<p>You have not created any task for viewing!</p> </div> </div> </div>';
                           }
                       while($row = pg_fetch_assoc($result)){ 
@@ -56,7 +56,14 @@
                             Start Date/Time: '.$row["task_starttime"]. '</br>
                             Duration: '.$row["task_duration"]. '</br>
                             Price: $'.$row["task_cost"]. '</br>
-                            Availability: '.$row["is_available"]. '</br>
+                            Availability: ';
+                            
+                       if ($row["is_available"] == 't'){
+                          echo 'True';
+                       } else {
+                         echo 'False';
+                       }
+                      echo '</br>
                             Description: '.$row["task_description"]. '</br></br>
                           </div>
 
@@ -64,7 +71,7 @@
 
                             <form action="viewbids.php" method="POST">
                               <div>
-                                <button class="w3-button w3-black" type="submit" name = "Display" value="'.$row['task_id'].'"">
+                                <button class="w3-button w3-black" type="submit" name = "view" value="'.$row['task_id'].'"">
                                   View bids
                                 </button>
                               </div>
@@ -73,7 +80,7 @@
                             <form action="edittask.php" method="POST">
                               <div>
                     		        <input type = "hidden" name = "user" value = '.$curUser.' />
-                                <button class="w3-button w3-black" type="submit" name = "taskid" value="'.$row['task_id'].'"">
+                                <button class="w3-button w3-black" type="submit" name = "edit" value="'.$row['task_id'].'"">
                                   Edit task
                                 </button>
                               </div>

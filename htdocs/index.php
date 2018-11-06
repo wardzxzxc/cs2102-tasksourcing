@@ -22,8 +22,6 @@
 	  <p>The convenient & affordable way to get things done around the home </p>
 	  <p class="lead">
 	  <button type="button" class="btn btn-secondary btn-lg"><a href="signup.php">Sign Up Here!</a></button>
-		<button type="button" class="btn btn-secondary btn-lg"><a href="searchuser.php">Search for User Here!</a></button>
-		<button type="button" class="btn btn-secondary btn-lg"><a href="searchtask.php">Search for Task Here!</a></button>
 	</div>
 	<?php
 		include 'footer.php'

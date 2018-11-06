@@ -40,7 +40,7 @@ if ($_POST[password] == ($_POST[password_repeat])) {
       ?>
     </div>
 
-    <div class = "container" align="center">
+    <div class = "container" align ="center">
         <h1>About TASKTORTOISE</h1>
         <br>
         <span><p><b>Hey there fellow busy humans,</b></p></span>

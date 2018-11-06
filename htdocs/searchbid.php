@@ -27,8 +27,7 @@ $_POST['bid_taskid'] = $_POST['task_id'];
       <div class = "container">
 
         <?php
-          $result = pg_query ($db, "SELECT * FROM bid WHERE bid_taskid = '$_POST[bid_taskid]'");
-          $result2 = pg_query($db, "SELECT user_id, first_name, last_name FROM users");
+          $result = pg_query ($db, "SELECT * FROM bid, users WHERE bid_taskid = '$_POST[bid_taskid]' AND bid_userid = user_id ");
         ?>
 
         <table class="w3-table-all w3-hoverable">
@@ -45,21 +44,14 @@ $_POST['bid_taskid'] = $_POST['task_id'];
           <tr>
               <td><?php echo $row['0']; ?></td>
               <td><?php echo $row['1']; ?></td>
-              <td><?php if ($row ['2'] == '1'){echo "Pending";}
-                        elseif($row['2'] == '2'){echo "Accepted";}
-                        else{echo "Rejected";}?></td>
-              <td><?php
-                  while ($row2 = pg_fetch_row($result2)){
-                  ?>
-                  <?php
-                  if ($row['3'] == $row2['0']){
-                    echo $row2['1'];
-                  }
-                  ?>
-              </td>
-                  <?php
-                  }
-                  ?>
+              <td><?php if ($row ['2'] == '1'){
+                            echo "Pending";
+                        } else if($row['2'] == '2'){ 
+                            echo "Accepted";
+                        }else {
+                          echo "Rejected";
+                        }?></td>
+              <td><?php echo $row['9']; ?></td>
           </tr>
           <?php
           }

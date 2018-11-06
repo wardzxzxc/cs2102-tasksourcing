@@ -29,17 +29,25 @@
 	          <div class="col-sm-12">
 	            <div class="panel panel-info">
 	              <?php 
-	                if(!$result) {
+	                if(pg_num_rows($result) == 0) {
 	                	echo '<p>You have not created any bids</p>';
 	                }
 	                
 	                while($row = pg_fetch_assoc($result)) { 
 		                echo 
-		                '<div class="panel-body">
+		                '<div class="panel-body" style="border: 2px solid black;">
 			                    Task Owner: '.$row["email"]. '</br>
 			                    Title: '.$row["task_title"]. '</br>
 			                    Description: '.$row["task_description"]. '</br>
-			                    Status: '.$row["bid_status"]. '</br>
+													Status: ';
+										if ($row["bid_status"] == 1) {
+											echo 'Pending';
+										} else if ($row["bid_status"] == 2) {
+											echo 'Accepted';
+										} else {
+											echo 'Rejected';
+										}
+										echo '</br>
 			                    Bid Date: '.$row["bid_datetime"]. '</br>
 			                    Bid Amount: $'.$row["bid_cost"]. '</br></br>
 		                </div>                     	
