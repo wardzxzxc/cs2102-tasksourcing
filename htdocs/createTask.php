@@ -50,7 +50,7 @@ li {
             placeholder="Task Description" name='task_description'/></p>
 
         <p><input class="w3-input w3-padding-small w3-border" type='text'
-            placeholder="Address" name='task_zipcode'/></p>
+            placeholder="Zipcode" name='task_zipcode'/></p>
 
         <p><input class="w3-input w3-padding-small w3-border" type='text'
             placeholder="Task Duration (in hour)" name='task_duration'/></p>

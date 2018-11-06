@@ -14,11 +14,15 @@ include('connection.php');
               $result = pg_query($db, "INSERT INTO bid (bid_cost, bid_datetime, bid_status, bid_userid, bid_taskid)
               VALUES('$_POST[amount]','$date','1','$curruser', '$_POST[task]')");
               if($result) 
-                  echo "<script> alert('Bid successful!'); </script>";
+                  echo "<script> 
+                    alert('Bid successful!'); 
+                    location.href = 'searchtask.php';
+                </script>";
               else {
                   echo "<script>
-                            alert('Bid unsuccessful!'); 
-                        </script>";    
+                    alert('Bid unsuccessful!'); 
+                    location.href = 'searchtask.php';
+                </script>";    
               }  
             }         
       ?> 

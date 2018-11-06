@@ -40,7 +40,7 @@
       <div class = "container">
 
         <form action="searchtask.php" method="GET">
-          <h4>Search for Task/s:</h4></br>
+          <h4>Search for Task(s):</h4></br>
           <input type="text" name="title" placeholder="Title">
           <h6>
             By Catergory:
@@ -59,7 +59,7 @@
           <h6>By Task's Start Time (eg. 2016-12-25 00:00:00): </h6>
           <input type="text" name="starttimedate" placeholder="Date Time"></br></br>
           <button type="submit" name = "search" class="w3-button w3-grey">Go!</button>
-			  </form>
+        </form>
         
         <?php 
           include('connection.php');
@@ -69,7 +69,7 @@
           $cost = $_GET["cost"];
           $start = $_GET["starttimedate"];
 
-          $arr = array("task_title"=>$title, "task_catalogue"=>$category, "task_cost"=>$cost, "task_starttime"=>$start);
+          $arr = array("task_title"=>'%'.$title.'%', "task_catalogue"=>$category, "task_cost"=>$cost, "task_starttime"=>$start);
           $query_string = "";
           
           foreach($arr as $field => $value) {
@@ -77,7 +77,11 @@
               if ($query_string !== "") {
                 $query_string = $query_string . " AND ";
               }
-              $query_string = $query_string . $field . " = '" . $value . "';" ;
+              if($field !== 'task_title') {
+                  $query_string = $query_string . $field . " = '" . $value . "'" ;
+                } else {
+                  $query_string = $query_string . $field . " LIKE '" . $value . "'" ;
+                }
             }
           }
   
@@ -90,11 +94,10 @@
             }
           } else {
             if($_SESSION['is_admin'] == 't') {
-              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND " . $query_string;
-              echo $query;
+              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND " . $query_string . ";" ;
               $result = pg_query ($db, $query);
             } else {
-              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND is_available = 't' AND " . $query_string;
+              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND is_available = 't' AND " . $query_string . ";" ;
               $result = pg_query ($db, $query);
             }
           }
