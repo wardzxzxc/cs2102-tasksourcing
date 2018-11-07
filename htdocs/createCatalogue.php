@@ -49,9 +49,15 @@ li {
     include('connection.php');
 
     if (isset($_POST['createCatalogue'])) {  // Submit the insert SQL command
-        $result = pg_query($db, "INSERT INTO catalogue (name) VALUES ('$_POST[name]')");
+
+        // Default Way (Working)
+        /* $result = pg_query($db, "INSERT INTO catalogue (name) VALUES ('$_POST[name]')"); */
         
+        // Method 1 (Not Working)
         /* $result = pg_query($db, "CALL createCatalogue('".$_POST["name"]."')"); */
+        
+        // Method 2 (Not Working - Reference from another group project)
+        $result = pg_query($db, "SELECT createCatalogue('$_POST[name]')");
       
         if (!$result) {
             echo '<div class="message"> Catalogue Item not created </div>';
