@@ -45,10 +45,14 @@ li {
         </ul>
   
   <?php
-    $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=jinwei95");
+    session_start();
+    include('connection.php');
 
     if (isset($_POST['createCatalogue'])) {  // Submit the insert SQL command
-        $result = pg_query($db, "INSERT INTO catalogue (catalogue_name) VALUES ('$_POST[catalogue_name]')");
+        $result = pg_query($db, "INSERT INTO catalogue (name) VALUES ('$_POST[name]')");
+        
+        /* $result = pg_query($db, "CALL createCatalogue('".$_POST["name"]."')"); */
+      
         if (!$result) {
             echo '<div class="message"> Catalogue Item not created </div>';
         } else {
