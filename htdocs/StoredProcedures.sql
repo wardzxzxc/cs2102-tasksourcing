@@ -42,3 +42,10 @@ CREATE OR REPLACE FUNCTION updateBidStatus()
     RETURN NEW;
     END;
     $bid_table$ LANGUAGE plpgsql;
+
+-- Update Bid Status Trigger
+CREATE TRIGGER updateOtherBids
+AFTER UPDATE
+ON bid
+FOR EACH ROW
+EXECUTE PROCEDURE updateBidStatus();
