@@ -28,3 +28,17 @@ CREATE OR REPLACE FUNCTION createCatalogue(name VARCHAR(128))
 	  VALUES (name);
 	END;
 	$$ LANGUAGE plpgsql;
+
+-- Update Bid Status StoredProcedure
+CREATE OR REPLACE FUNCTION updateBidStatus()
+    RETURNS TRIGGER AS $bid_table$
+    BEGIN
+    IF NEW.bid_status = '2' THEN 
+    UPDATE bid SET bid_status = '3' WHERE bid_status = '1' AND bid_taskid = NEW.bid_taskid;
+    END IF;
+    IF NEW.bid_status = '1' THEN
+    UPDATE bid SET bid_status = '1' WHERE bid_status = '3' AND bid_taskid = NEW.bid_taskid ;
+    END IF;
+    RETURN NEW;
+    END;
+    $bid_table$ LANGUAGE plpgsql;
