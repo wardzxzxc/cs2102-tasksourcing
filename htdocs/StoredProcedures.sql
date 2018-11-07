@@ -45,7 +45,7 @@ CREATE OR REPLACE FUNCTION updateBidStatus()
 
 -- Update Bid Status Trigger
 CREATE TRIGGER updateOtherBids
-AFTER UPDATE
-ON bid
-FOR EACH ROW
-EXECUTE PROCEDURE updateBidStatus();
+    AFTER UPDATE
+    ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE updateBidStatus();
