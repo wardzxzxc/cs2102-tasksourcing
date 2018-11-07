@@ -76,7 +76,8 @@ li {
     include('connection.php');
 
     if (isset($_POST['create'])) {  // Submit the insert SQL command
-        $result = pg_query($db, "INSERT INTO users (first_name, last_name, gender, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]', '$_POST[last_name]', '$_POST[gender]', '$_POST[email]', '$_POST[phone]', '$_POST[password]', '$_POST[zipcode]', '$_POST[is_admin]')");
+        $result = pg_query($db, "SELECT createUser ('$_POST[first_name]', '$_POST[last_name]', '$_POST[gender]', 
+        '$_POST[email]', '$_POST[phone]', '$_POST[password]', '$_POST[zipcode]', '$_POST[is_admin]')");
         if (!$result) {
             echo '<div class="message"> User not created </div>';
         } else {
