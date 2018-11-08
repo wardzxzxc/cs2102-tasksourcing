@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION create_bid(bid_cost NUMERIC, bid_datetime TIMESTAMP, 
 	$$ LANGUAGE plpgsql;
 
 -- Create Catalogue Stored Procedure
-CREATE OR REPLACE FUNCTION createCatalogue(name VARCHAR(128))
+CREATE OR REPLACE FUNCTION create_catalogue(name VARCHAR(128))
 	RETURNS void AS $$
 	BEGIN
 	  INSERT INTO catalogue (name)
