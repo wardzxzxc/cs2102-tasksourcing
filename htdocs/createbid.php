@@ -11,8 +11,9 @@ include('connection.php');
         $date = date("Y-m-d H:i:s");
 
          if (isset($_POST['bid'])) {
-              $result = pg_query($db, "INSERT INTO bid (bid_cost, bid_datetime, bid_status, bid_userid, bid_taskid)
-              VALUES('$_POST[amount]','$date','1','$curruser', '$_POST[task]')");
+                 
+              $result = pg_query($db, "SELECT create_bid ('$_POST[amount]', '$date', '1', '$curruser', '$_POST[task]')");
+                 
               if($result) 
                   echo "<script> 
                     alert('Bid successful!'); 
