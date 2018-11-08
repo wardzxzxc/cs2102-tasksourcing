@@ -1,4 +1,4 @@
--- Create User StoredProcedure
+-- Create User Stored Procedure
 CREATE OR REPLACE FUNCTION create_user(first_name VARCHAR(64), last_name VARCHAR(64), gender VARCHAR(8), email VARCHAR(256), 
     phone CHAR(8), password VARCHAR(64), zipcode NUMERIC, is_admin BOOLEAN)
 	RETURNS void AS $$
@@ -20,7 +20,7 @@ CREATE OR REPLACE FUNCTION create_task(task_cost NUMERIC, task_title VARCHAR(256
 	END;
 	$$ LANGUAGE plpgsql;
 
--- Update Bid Status StoredProcedure
+-- Update Bid Status Stored Procedure
 CREATE OR REPLACE FUNCTION update_bid_status()
     RETURNS TRIGGER AS $bid_table$
     BEGIN
