@@ -57,4 +57,4 @@ CREATE TRIGGER update_other_bids
     AFTER UPDATE
     ON bid
     FOR EACH ROW
-    EXECUTE PROCEDURE updateBidStatus();
+    EXECUTE PROCEDURE update_bid_status();
