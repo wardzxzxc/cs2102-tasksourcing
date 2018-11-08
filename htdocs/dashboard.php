@@ -35,9 +35,10 @@ $isAdmin = $_SESSION["is_admin"];
                       if ($_SESSION['is_admin'] == 't') {
                         echo '<li><a href="createTask.php">Create New Task</a></li>';
                         echo '<li><a href="searchtask.php">View All Tasks</a></li>';
+                        echo '<li><a href="searchuser.php">View All Users</a></li>';
                         echo '<li><a href="viewowntasks.php">View Your Tasks Created</a></li>';
                         echo '<li><a href="viewownbids.php">View Your Bids</a></li>';
-
+                        
                       } else {
                         echo '<li><a href="createTask.php">Create New Task</a></li>';
                         echo '<li><a href="viewowntasks.php">View Your Tasks Created</a></li>';
@@ -87,6 +88,16 @@ $isAdmin = $_SESSION["is_admin"];
             ?>
         </tbody>
         </table>
+        <form action = "edituser.php" method="POST">
+          <button class="w3-button w3-black" type="submit" name = "edit" value="<?php echo $curUser; ?> ">
+                Edit Profile
+          </button>
+        </form>
+        <form action = "changepassword.php" method="POST">
+        <button class="w3-button w3-black" type="submit" name = "change_password" value="<?php echo $curUser; ?> ">
+                Change Password
+          </button>
+        </form>
       </div>
       </div>
 
