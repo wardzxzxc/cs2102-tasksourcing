@@ -80,11 +80,10 @@ li {
     if (isset($_POST['createTask'])) {  // Submit the insert SQL command
         $date = date('Y-m-d H:i:s');
 
-        $result = pg_query($db, "INSERT INTO task (task_cost, task_title, task_description, task_datetime_created, task_zipcode,
-                     task_duration, task_starttime, is_available, task_owner, task_catalogue) VALUES
-                     ('$_POST[task_cost]', '$_POST[task_title]', '$_POST[task_description]', '$date', '$_POST[task_zipcode]',
-                     '$_POST[task_duration]', '$_POST[task_starttime]', '1', '$curUser', '$_POST[task_catalogue]')");
-
+        $result = pg_query($db, "SELECT create_task ('$_POST[task_cost]', '$_POST[task_title]', 
+        '$_POST[task_description]', '$date', '$_POST[task_zipcode]', '$_POST[task_duration]', 
+        '$_POST[task_starttime]', '1', '$curUser', '$_POST[task_catalogue]')");
+        
         if (!$result) {
             echo '<div class="message"> Task not created </div>';
         } else {
