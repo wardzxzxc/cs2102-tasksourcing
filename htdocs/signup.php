@@ -4,9 +4,10 @@
 
 	if ($_POST[password] == ($_POST[password_repeat])) {
 	 	if (isset($_POST['signup'])) {  // Submit the insert SQL command
-	 		$result = pg_query($db, "INSERT INTO users(first_name, last_name, gender, email, phone, password, zipcode, is_admin) VALUES ('$_POST[first_name]',
-	 			'$_POST[last_name]', '$_POST[gender]', '$_POST[email]', '$_POST[phone]', '$_POST[password]',
-	 			'$_POST[zipcode]', 'FALSE')");
+			
+			$result = pg_query($db, "SELECT create_user ('$_POST[first_name]', '$_POST[last_name]', 
+			'$_POST[gender]', '$_POST[email]', '$_POST[phone]', '$_POST[password]', '$_POST[zipcode]', 'FALSE')");
+			
 	 		if (!$result) {
 	 			echo "<script type='text/javascript'>alert('A user with this email address already exists!')</script>";
 	 		} else {
