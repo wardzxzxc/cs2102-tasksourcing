@@ -12,7 +12,8 @@
     				$_SESSION["user"] = $result_arr[2];
     				if ($result_arr[1] == t) {
     					$_SESSION["is_admin"] = t;
-    					$message = '<span>Admin login successful!</span>'; 					
+    					$message = '<span>Admin login successful!</span>';
+					header("Location: dashboard.php");
     				} else {
     					header("Location: dashboard.php");
     				}
