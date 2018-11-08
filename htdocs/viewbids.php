@@ -3,8 +3,12 @@
       include('connection.php');
       $curUser = $_SESSION["user"];
       $_POST['taskid'] = $_POST['view'];
-      $result = pg_query($db, "SELECT * FROM bid b, users u  WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]'");
-      $result1 = pg_query($db, "SELECT * FROM bid b, users u  WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]' AND b.bid_status = 2");
+    
+      $maximumbid = pg_query($db, "SELECT MAX(bid_cost) FROM bid b, users u WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]'");
+    
+      $result = pg_query($db, "SELECT * FROM bid b, users u WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]' ORDER BY bid_cost, bid_datetime");
+    
+      $result1 = pg_query($db, "SELECT * FROM bid b, users u WHERE b.bid_userid = u.user_id AND b.bid_taskid = '$_POST[taskid]' AND b.bid_status = 2 ORDER BY bid_cost, bid_datetime");
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +29,14 @@
 
 <!-- Login Section !-->
 <div class="w3-container w3-light-grey" style="padding:96px" id="home">
+
+<h2 style="color:red; font-family:verdana; text-align:center;">
+<?php
+    $row = pg_fetch_row($maximumbid);
+    echo "Current Highest Bid: $";
+    echo $row[0];
+?>
+</h2>
       <h3 class="w3-center">All Bids</h3>
       <p><div class="container">   
       <div class="row">
@@ -38,12 +50,12 @@
             //     echo $bidAccepted;
             //   }
             // }
-
+            
             while($row = pg_fetch_assoc($result)){   //Creates a loop to loop through results
 
             echo 
             '<div class="panel-body" style="border: 2px solid black;">
-              Bidder: '.$row["email"]. '</br>
+              Bidder: '.$row["email"].'</br>
               Status: ';
             if ($row["bid_status"] == 1) {
               echo 'Pending';
@@ -53,8 +65,8 @@
               echo 'Rejected';
             }
             echo '</br>
-              Bid Amount: $'.$row["bid_cost"]. '</br>
-              Bid Created Date/Time: '.$row["bid_datetime"]. '</br>
+              Bid Amount: $'.$row["bid_cost"].' </br>
+              Bid Created Date/Time: '.$row["bid_datetime"].' </br>
             </div>';
             
             if (pg_numrows($result1) == 0) {
