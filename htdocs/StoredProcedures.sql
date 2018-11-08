@@ -1,5 +1,5 @@
 -- Create User StoredProcedure
-CREATE OR REPLACE FUNCTION createUser(first_name VARCHAR(64), last_name VARCHAR(64), gender VARCHAR(8), email VARCHAR(256), 
+CREATE OR REPLACE FUNCTION create_user(first_name VARCHAR(64), last_name VARCHAR(64), gender VARCHAR(8), email VARCHAR(256), 
     phone CHAR(8), password VARCHAR(64), zipcode NUMERIC, is_admin BOOLEAN)
 	RETURNS void AS $$
 	BEGIN
@@ -8,8 +8,8 @@ CREATE OR REPLACE FUNCTION createUser(first_name VARCHAR(64), last_name VARCHAR(
 	END;
 	$$ LANGUAGE plpgsql;
 
--- Create Task StoredProcedure
-CREATE OR REPLACE FUNCTION createTask(task_cost NUMERIC, task_title VARCHAR(256), task_description VARCHAR(500), task_datetime_created TIMESTAMP,
+-- Create Task Stored Procedure
+CREATE OR REPLACE FUNCTION create_task(task_cost NUMERIC, task_title VARCHAR(256), task_description VARCHAR(500), task_datetime_created TIMESTAMP,
     task_zipcode NUMERIC, task_duration INTEGER, task_starttime TIMESTAMP, is_available BOOLEAN, task_owner INTEGER, task_catalogue VARCHAR(128))
 	RETURNS void AS $$
 	BEGIN
@@ -20,17 +20,8 @@ CREATE OR REPLACE FUNCTION createTask(task_cost NUMERIC, task_title VARCHAR(256)
 	END;
 	$$ LANGUAGE plpgsql;
 
--- Create Catalogue StoredProcedure
-CREATE OR REPLACE FUNCTION createCatalogue(name VARCHAR(128))
-	RETURNS void AS $$
-	BEGIN
-	  INSERT INTO catalogue (name)
-	  VALUES (name);
-	END;
-	$$ LANGUAGE plpgsql;
-
 -- Update Bid Status StoredProcedure
-CREATE OR REPLACE FUNCTION updateBidStatus()
+CREATE OR REPLACE FUNCTION update_bid_status()
     RETURNS TRIGGER AS $bid_table$
     BEGIN
     IF NEW.bid_status = '2' THEN 
@@ -44,7 +35,7 @@ CREATE OR REPLACE FUNCTION updateBidStatus()
     $bid_table$ LANGUAGE plpgsql;
 
 -- Update Bid Status Trigger
-CREATE TRIGGER updateOtherBids
+CREATE TRIGGER update_other_bids
     AFTER UPDATE
     ON bid
     FOR EACH ROW
