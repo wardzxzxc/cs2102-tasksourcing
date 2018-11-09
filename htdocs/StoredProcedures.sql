@@ -67,15 +67,15 @@ DECLARE
 BEGIN
 	tasks := COUNT(t.task_id) from task t, bid b WHERE
 	t.task_id = b.bid_taskid AND t.task_id = OLD.bid_taskid
-	AND b.bid_status = 2 OR b.bid_status = 3;
+	AND (b.bid_status = 2 OR b.bid_status = 3);
 	
 	IF tasks <> 0 THEN
 		RAISE EXCEPTION 'Cannot delete bid as bid accepted';
 	END IF;
 	
 RETURN OLD;
-END;
-	
+END; $$
+LANGUAGE PLPGSQL;
 -- Create Trigger For Not Allowing Deletion Of Acccepted Bids -- 
 CREATE TRIGGER check_bid
 BEFORE DELETE ON bid
