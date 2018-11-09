@@ -7,10 +7,16 @@ $curUser = $_SESSION["user"];
 
 if(isset($_POST['update'])) {
     echo $curUser;
-    if($_POST['password'] == $_POST['password_repeat']) {
-
-
-        $result = pg_query($db, "UPDATE users SET password = 'password234' WHERE user_id = $curUser");
+    $inputpassword = $_POST['current_password'];
+    $password = $_POST['password'];
+    $password_repeat = $_POST['password_repeat'];
+    $result = pg_query($db, "SELECT u.password FROM users u WHERE u.user_id = $curUser");
+    $row = pg_fetch_assoc($result);
+    echo $currpassword;
+    if($inputpassword == $row["password"]) {
+        if($password == $password_repeat) {
+        
+        $result = pg_query($db, "UPDATE users SET password = '$password' WHERE user_id = '$curUser'");
       
         if ($result) {
             echo "<script>
@@ -20,7 +26,7 @@ if(isset($_POST['update'])) {
 
         } else {
             echo "<script>
-            alert('Password Changed Unsuccessful. Did you key in the correct current password?');
+            alert('Password Changed Unsuccessful.');
           </script>";
 
         }
@@ -29,6 +35,12 @@ if(isset($_POST['update'])) {
         alert('Please re-enter the same new password');
       </script>";
     }
+    } else {
+        echo "<script>
+            alert('Please key in the correct current password');
+          </script>";
+    }
+
 }
 
 ?>
@@ -74,11 +86,11 @@ if(isset($_POST['update'])) {
 
         <span>New Password</span>
         <p><input class="w3-input w3-padding-small w3-border" type='password' minlength="8"
-           name='password'/></p>
+           name='password' required/></p>
 
         <span>Confirm New Password</span>
         <p><input class="w3-input w3-padding-small w3-border" type='password' minlength="8"
-            name='password_repeat'/></p>
+            name='password_repeat' required/></p>
   
         <p><input class="w3-input w3-padding-small w3-border" type='hidden' value="<?php echo $user_id; ?>"
          name='user_id'/></p>
