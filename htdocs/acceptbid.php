@@ -6,10 +6,12 @@
       $bidder = $arr[0];
       $taskid = $arr[1];
 
-      //set everything to rejected
+      //Set all bids to "rejected"
       $result =  pg_query($db, "UPDATE bid SET bid_status = '3' WHERE bid_taskid = '$taskid'");
-      $result1 = pg_query($db, "UPDATE bid SET bid_status = '2' WHERE bid_userid = '$bidder' AND bid_taskid = '$taskid'");
-      $result2 = pg_query($db, "UPDATE task SET is_available = 'f' WHERE task_id = '$taskid'");
+      //Set the selected bid to "accepted"
+      $result1 = pg_query($db, "UPDATE bid SET bid_status = '2' WHERE bid_userid = '$bidder' AND bid_taskid = '$taskid'"); 
+      //Close the task
+      $result2 = pg_query($db, "UPDATE task SET is_available = 'f' WHERE task_id = '$taskid'"); //Closed the task
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,10 +36,10 @@
       <div class="col-sm-12">
         <div class="panel panel-info">
     <?php 
-              if(!$result1 || !$result2) {
+              if(!$result || !$result1 || !$result2) {
                 echo '<p>Bid not approved successfully!</p> ';
               }
-              else if ($result1 && $result2) {
+              else if ($result && $result1 && $result2) {
                 echo '<p>Bid approved successfully!</p>';
               }
     ?>
