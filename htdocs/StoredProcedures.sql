@@ -58,3 +58,26 @@ CREATE TRIGGER update_other_bids
     ON bid
     FOR EACH ROW
     EXECUTE PROCEDURE update_bid_status();
+
+-- Create Stored Procedure For Not Allowing Deletion Of Acccepted Bids -- 
+CREATE OR REPLACE FUNCTION check_for_task()
+RETURNS TRIGGER AS $$
+DECLARE 
+	tasks integer;
+BEGIN
+	tasks := COUNT(t.task_id) from task t, bid b WHERE
+	t.task_id = b.bid_taskid AND t.task_id = OLD.bid_taskid
+	AND b.bid_status = 2 OR b.bid_status = 3;
+	
+	IF tasks <> 0 THEN
+		RAISE EXCEPTION 'Cannot delete bid as bid accepted';
+	END IF;
+	
+RETURN OLD;
+END;
+	
+-- Create Trigger For Not Allowing Deletion Of Acccepted Bids -- 
+CREATE TRIGGER check_bid
+BEFORE DELETE ON bid
+FOR EACH ROW
+EXECUTE PROCEDURE check_for_task();

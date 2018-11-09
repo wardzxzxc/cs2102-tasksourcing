@@ -6,17 +6,27 @@
       
       if(isset($_POST['delete'])) {
     	$result1 = pg_query($db, "DELETE FROM bid WHERE bid_taskid = '$_POST[delete]'");
-    	$result2 = pg_query($db, "DELETE FROM task WHERE task_id = '$_POST[delete]'");
-      if (!$result1 || !$result2) {
-    	echo 
-           "Task deletion was unsuccessful";
-      } else if ($result1 && $result2) {
+      $result2 = pg_query($db, "DELETE FROM task WHERE task_id = '$_POST[delete]'");
+      if (!$result1) {
         echo 
+        "<script>
+            alert('Task deleted unsuccessfully!');
+            location.href = 'searchtask.php';
+        </script>";
+      } else {
+        if ($result2) {
+          echo 
           "<script>
               alert('Task deleted successfully!');
-              location.href = 'viewowntasks.php';
+              location.href = 'searchtask.php';
             </script>";
-   
+        } else {
+          echo 
+          "<script>
+              alert('Task deleted unsuccessfully!');
+              location.href = 'searchtask.php';
+          </script>";
+        } 
       }
     }
   ?> 

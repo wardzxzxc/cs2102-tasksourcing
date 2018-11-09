@@ -1,20 +1,31 @@
 <?php
   session_start();
   include('connection.php');
+  echo $_POST['delete'];
 
   if(isset($_POST['delete'])) {
-    $result1 = pg_query($db, "DELETE FROM bid WHERE bid_taskid = '$_POST[delete]'");
+    $result1 = pg_query($db, "DELETE FROM bid WHERE bid_taskid = $_POST[delete]");
     $result2 = pg_query($db, "DELETE FROM task WHERE task_id = '$_POST[delete]'");
-    if (!$result1 || !$result2) {
-    echo 
-         "Task deletion was unsuccessful";
-    } else if ($result1 && $result2) {
+    if (!$result1) {
       echo 
+      "<script>
+          alert('Task deleted unsuccessfully!');
+          location.href = 'searchtask.php';
+      </script>";
+    } else {
+      if ($result2) {
+        echo 
         "<script>
             alert('Task deleted successfully!');
             location.href = 'searchtask.php';
           </script>";
- 
+      } else {
+        echo 
+        "<script>
+            alert('Task deleted unsuccessfully!');
+            location.href = 'searchtask.php';
+        </script>";
+      } 
     }
   }
  ?>
@@ -40,26 +51,29 @@
       <div class = "container">
 
         <form action="searchtask.php" method="GET">
-          <h4>Search for Task(s):</h4></br>
+          <h4>Search for Task/s:</h4>
+          <br>
+          <h5>By Title:</h5>
           <input type="text" name="title" placeholder="Title">
-          <h6>
-            By Catergory:
+          <h5>
+            By Catergory:<br>
             <select id="category" name="category">
               <option value="">Catergory</option>
-              <?php
-                $result1 = pg_query($db, "SELECT name FROM catalogue");                                
-                while($row = pg_fetch_array($result1)) {
-                  echo   "<option value = " . $row["name"] . ">" . $row["name"] . " </option>";
+                <?php
+                  $result1 = pg_query($db, "SELECT name FROM catalogue");                                
+                  while($row = pg_fetch_array($result1)) {
+                    echo   "<option value = " . $row["name"] . ">" . $row["name"] . " </option>";
 
-                }?>
+                  }?>
             </select>
-          </h6></br>
-          <h6>By Cost:</h6>
+          </h5>
+          <br>
+          <h5>By Cost:</h5>
           <input type="text" name="cost" placeholder="Cost">
-          <h6>By Task's Start Time (eg. 2016-12-25 00:00:00): </h6>
-          <input type="text" name="starttimedate" placeholder="Date Time"></br></br>
-          <button type="submit" name = "search" class="w3-button w3-grey">Go!</button>
-        </form>
+          <h5>By Task's Start Time (eg. 2016-12-25 00:00:00): </h5>
+          <input type="text" name="starttimedate" placeholder="Date Time"><br>
+          <button type="submit" name = "search" class="w3-button w3-black">Go!</button>
+			  </form>
         
         <?php 
           include('connection.php');
@@ -69,7 +83,7 @@
           $cost = $_GET["cost"];
           $start = $_GET["starttimedate"];
 
-          $arr = array("task_title"=>'%'.$title.'%', "task_catalogue"=>$category, "task_cost"=>$cost, "task_starttime"=>$start);
+          $arr = array("task_title"=>$title, "task_catalogue"=>$category, "task_cost"=>$cost, "task_starttime"=>$start);
           $query_string = "";
           
           foreach($arr as $field => $value) {
@@ -77,11 +91,7 @@
               if ($query_string !== "") {
                 $query_string = $query_string . " AND ";
               }
-              if($field !== 'task_title') {
-                  $query_string = $query_string . $field . " = '" . $value . "'" ;
-                } else {
-                  $query_string = $query_string . $field . " LIKE '" . $value . "'" ;
-                }
+              $query_string = $query_string . $field . " = '" . $value . "';" ;
             }
           }
   
@@ -94,10 +104,10 @@
             }
           } else {
             if($_SESSION['is_admin'] == 't') {
-              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND " . $query_string . ";" ;
+              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND " . $query_string;
               $result = pg_query ($db, $query);
             } else {
-              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND is_available = 't' AND " . $query_string . ";" ;
+              $query = "SELECT * FROM task, users WHERE task_owner = user_id AND is_available = 't' AND " . $query_string;
               $result = pg_query ($db, $query);
             }
           }
@@ -155,7 +165,7 @@
               if($_SESSION['is_admin'] == 't') {
                 echo '          
                       <td>
-                        <form action = "editTask.php" method="POST">
+                        <form action = "edittask.php" method="POST">
                         <button class="w3-button w3-black" type="submit" name = "edit" value="'.$row['0'].'"">
                           Edit Task
                         </button>

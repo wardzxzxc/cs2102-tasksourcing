@@ -57,7 +57,7 @@ li {
         /* $result = pg_query($db, "CALL createCatalogue('".$_POST["name"]."')"); */
         
         // Method 2 (Not Working - Reference from another group project)
-        $result = pg_query($db, "SELECT createCatalogue('$_POST[name]')");
+        $result = pg_query($db, "SELECT create_catalogue('$_POST[catalogue_name]')");
       
         if (!$result) {
             echo '<div class="message"> Catalogue Item not created </div>';
