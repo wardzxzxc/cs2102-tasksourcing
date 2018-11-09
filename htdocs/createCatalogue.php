@@ -54,9 +54,9 @@ li {
         /* $result = pg_query($db, "INSERT INTO catalogue (name) VALUES ('$_POST[name]')"); */
         
         // Method 1 (Not Working)
-        /* $result = pg_query($db, "CALL createCatalogue('".$_POST["name"]."')"); */
+        /* $result = pg_query($db, "CALL create_catalogue('".$_POST["name"]."')"); */
         
-        // Method 2 (Not Working - Reference from another group project)
+        // Method 2
         $result = pg_query($db, "SELECT create_catalogue('$_POST[catalogue_name]')");
       
         if (!$result) {
