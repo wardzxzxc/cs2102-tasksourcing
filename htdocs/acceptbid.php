@@ -10,8 +10,8 @@
       $result =  pg_query($db, "UPDATE bid SET bid_status = '3' WHERE bid_taskid = '$taskid'");
       //Set the selected bid to "accepted"
       $result1 = pg_query($db, "UPDATE bid SET bid_status = '2' WHERE bid_userid = '$bidder' AND bid_taskid = '$taskid'"); 
-      //Close the task
-      $result2 = pg_query($db, "UPDATE task SET is_available = 'f' WHERE task_id = '$taskid'"); //Closed the task
+      //Close the task (Make it unavailable)
+      $result2 = pg_query($db, "UPDATE task SET is_available = 'f' WHERE task_id = '$taskid'");
 ?>
 <!DOCTYPE html>
 <html>
