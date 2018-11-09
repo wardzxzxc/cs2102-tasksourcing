@@ -65,10 +65,12 @@ $isAdmin = $_SESSION["is_admin"];
           </tr>
           <tbody>
             <?php 
-            $result = pg_query($db, "SELECT * FROM task t, users u, bid b, users u1 WHERE 
-                                    u.user_id = b.bid_userid AND t.task_id = b.bid_taskid
-                                    AND u.user_id = '$curUser' AND b.bid_status = '2'
-                                    AND t.task_owner = u1.user_id");
+            $result = pg_query($db, "SELECT t.task_title, t.task_description, t.task_starttime, t.task_duration, t.task_zipcode, u2.email 
+              FROM task t, users u1, bid b, users u2 
+              WHERE u1.user_id = b.bid_userid 
+              AND t.task_id = b.bid_taskid
+              AND u1.user_id = '$curUser' AND b.bid_status = '2'
+              AND t.task_owner = u2.user_id");
 
             if (pg_num_rows($result) > 0) {
 
